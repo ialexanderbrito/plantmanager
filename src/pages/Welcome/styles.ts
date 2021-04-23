@@ -1,10 +1,11 @@
 import styled from 'styled-components/native';
+import { Dimensions } from 'react-native'
 import colors from '../../styles/colors';
 
 export const Container = styled.SafeAreaView`
   flex: 1;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 `;
 
 export const Title = styled.Text`
@@ -16,8 +17,7 @@ export const Title = styled.Text`
 `;
 
 export const Background = styled.Image`
-  width: 292px;
-  height: 284px;
+  height: ${Dimensions.get('window').width * 0.7};
 `;
 
 export const Description = styled.Text`
@@ -37,7 +37,6 @@ export const Button = styled.TouchableOpacity`
   width: 56px;
 `;
 
-export const ButtonText = styled.Text`
+export const ButtonIcon = styled.Text`
   color: ${colors.white};
-  font-size: 24px;
 `;

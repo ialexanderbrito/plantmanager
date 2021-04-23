@@ -1,6 +1,7 @@
 import React from 'react';
 
 import wateringImg from '../../assets/watering.png';
+import { Feather } from '@expo/vector-icons';
 
 import {
   Container,
@@ -8,7 +9,7 @@ import {
   Background,
   Description,
   Button,
-  ButtonText,
+  ButtonIcon,
 } from './styles';
 
 export function Welcome() {
@@ -21,7 +22,7 @@ export function Welcome() {
           de forma fácil.
         </Title>
 
-        <Background source={wateringImg} />
+        <Background source={wateringImg} resizeMode="contain" />
 
         <Description>
           Não esqueça mais de regar suas plantas. Nós cuidamos de lembrar você
@@ -29,7 +30,9 @@ export function Welcome() {
         </Description>
 
         <Button activeOpacity={0.7}>
-          <ButtonText>{'>'}</ButtonText>
+          <ButtonIcon>
+            <Feather name="chevron-right" size={32} />
+          </ButtonIcon>
         </Button>
       </Container>
     </>
