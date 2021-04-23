@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { Dimensions } from 'react-native'
+import { Dimensions } from 'react-native';
 import colors from '../../styles/colors';
 import fonts from '../../styles/fonts';
 
