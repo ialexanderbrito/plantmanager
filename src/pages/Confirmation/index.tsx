@@ -1,10 +1,16 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/core';
 
 import { Button } from '../../components/Button';
 
 import { Container, Content, Emoji, Title, SubTitle, Footer } from './styles';
 
 export function Confirmation() {
+  const navigation = useNavigation();
+
+  function handleMoveOn() {
+    navigation.navigate('PlantSelect');
+  }
   return (
     <Container>
       <Content>
@@ -14,7 +20,7 @@ export function Confirmation() {
           Agora vamos começar a cuidar das suas plantinhas com muito cuidado.
         </SubTitle>
         <Footer>
-          <Button title="Começar" />
+          <Button title="Começar" onPress={handleMoveOn} />
         </Footer>
       </Content>
     </Container>
