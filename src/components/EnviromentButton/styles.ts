@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { StyleSheet } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import colors from '../../styles/colors';
 import fonts from '../../styles/fonts';
@@ -10,11 +11,7 @@ export const Button = styled(RectButton)`
   justify-content: center;
   align-items: center;
   border-radius: 12px;
-  margin-right: 5px;
-`;
-
-export const ButtonActive = styled(Button)`
-  background-color: ${colors.green_light};
+  margin-horizontal: 5px;
 `;
 
 export const Title = styled.Text`
@@ -22,7 +19,12 @@ export const Title = styled.Text`
   font-family: ${fonts.text};
 `;
 
-export const TitleActive = styled(Title)`
-  color: ${colors.green_dark};
-  font-family: ${fonts.heading};
-`;
+export default StyleSheet.create({
+  containerActive: {
+    backgroundColor: colors.green_light,
+  },
+  titleActive: {
+    color: colors.heading,
+    fontFamily: fonts.heading,
+  },
+});
