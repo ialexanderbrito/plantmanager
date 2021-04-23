@@ -9,7 +9,7 @@ export const Container = styled.SafeAreaView`
   justify-content: space-around;
 `;
 
-export const Keyboard = styled.KeyboardAvoidingView`
+export const KeyboardView = styled.KeyboardAvoidingView`
   flex: 1;
   width: 100%;
   align-items: center;

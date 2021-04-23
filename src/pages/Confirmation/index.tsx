@@ -14,7 +14,7 @@ export function Confirmation() {
           Agora vamos começar a cuidar das suas plantinhas com muito cuidado.
         </SubTitle>
         <Footer>
-          <Button />
+          <Button title="Começar" />
         </Footer>
       </Content>
     </Container>
