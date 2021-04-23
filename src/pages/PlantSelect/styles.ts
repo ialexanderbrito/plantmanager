@@ -27,14 +27,16 @@ export const SubTitle = styled.Text`
   line-height: 20px;
 `;
 
-export const List = styled.View``;
+export const List = styled.View`
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 5px;
+  margin-left: 32px;
+  margin-vertical: 32px;
+`;
 
-export default StyleSheet.create({
-  enviromentList: {
-    height: 40,
-    justifyContent: 'center',
-    paddingBottom: 5,
-    marginLeft: 32,
-    marginVertical: 32,
-  },
-});
+export const ListPlant = styled.View`
+  flex: 1;
+  padding-horizontal: 32px;
+  justify-content: center;
+`;
