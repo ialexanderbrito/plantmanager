@@ -12,7 +12,7 @@ interface PlantProps extends RectButtonProps {
 
 export const PlantCardPrimary = ({ data, ...rest }: PlantProps) => {
   return (
-    <Container>
+    <Container {...rest}>
       <PlantImg uri={data.photo} width={70} height={70} />
       <Title>{data.name}</Title>
     </Container>
