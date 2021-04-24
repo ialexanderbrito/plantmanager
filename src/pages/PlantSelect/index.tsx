@@ -1,20 +1,14 @@
 /* eslint-disable consistent-return */
 import React, { useState, useEffect } from 'react';
 import { FlatList, ActivityIndicator } from 'react-native';
+import { useNavigation } from '@react-navigation/core';
 
 import { Header } from '../../components/Header';
 import { EnviromentButton } from '../../components/EnviromentButton';
 import { PlantCardPrimary } from '../../components/PlantCardPrimary';
 import { Load } from '../../components/Load';
 
-import styles, {
-  Container,
-  Content,
-  Title,
-  SubTitle,
-  List,
-  ListPlant,
-} from './styles';
+import { Container, Content, Title, SubTitle, List, ListPlant } from './styles';
 
 import api from '../../services/api';
 import colors from '../../styles/colors';
@@ -38,6 +32,8 @@ interface PlantProps {
 }
 
 export function PlantSelect() {
+  const navigation = useNavigation();
+
   const [environments, setEnvironments] = useState<EnviromentProps[]>();
   const [plants, setPlants] = useState<PlantProps[]>([]);
   const [filteredPlants, setFilteredPlants] = useState<PlantProps[]>([]);
@@ -83,6 +79,10 @@ export function PlantSelect() {
     setLoadingMore(true);
     setPage((oldValue) => oldValue + 1);
     fetchPlants();
+  }
+
+  function handlePlantSelect(plant: PlantProps) {
+    navigation.navigate('PlantSave', { plant });
   }
 
   useEffect(() => {
@@ -136,7 +136,12 @@ export function PlantSelect() {
         <FlatList
           keyExtractor={(item) => String(item.id)}
           data={filteredPlants}
-          renderItem={({ item }) => <PlantCardPrimary data={item} />}
+          renderItem={({ item }) => (
+            <PlantCardPrimary
+              data={item}
+              onPress={() => handlePlantSelect(item)}
+            />
+          )}
           showsVerticalScrollIndicator={false}
           numColumns={2}
           onEndReachedThreshold={0.1}
