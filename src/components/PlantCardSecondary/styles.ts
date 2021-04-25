@@ -15,6 +15,22 @@ export const Container = styled(RectButton)`
   margin-vertical: 5px;
 `;
 
+export const ContainerRemove = styled.View``;
+
+export const ButtonRemove = styled(RectButton)`
+  width: 130px;
+  height: 100px;
+  background-color: ${colors.red};
+  margin-top: 8px;
+  border-radius: 20px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  right: 25px;
+  padding-left: 15px;
+  margin-right: -25px;
+`;
+
 export const Title = styled.Text`
   flex: 1;
   margin-left: 10;

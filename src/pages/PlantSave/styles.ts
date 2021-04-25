@@ -1,8 +1,11 @@
 import styled from 'styled-components/native';
+import { StyleSheet } from 'react-native';
 import { getBottomSpace } from 'react-native-iphone-x-helper';
 import { SvgFromUri } from 'react-native-svg';
 import colors from '../../styles/colors';
 import fonts from '../../styles/fonts';
+
+export const Wrapper = styled.ScrollView``;
 
 export const Container = styled.View`
   flex: 1;
@@ -18,6 +21,12 @@ export const PlantInfo = styled.View`
   justify-content: center;
   background-color: ${colors.shape};
 `;
+
+export const PlantInfoBack = styled.View`
+  align-self: flex-start;
+`;
+
+export const Back = styled.TouchableOpacity``;
 
 export const ImagePlant = styled(SvgFromUri)`
   width: 150px;
@@ -90,3 +99,11 @@ export const DateTimePickerText = styled.Text`
   font-size: 24px;
   font-family: ${fonts.text};
 `;
+
+export default StyleSheet.create({
+  container: {
+    flexGrow: 1,
+    justifyContent: 'space-between',
+    backgroundColor: colors.shape,
+  },
+});
