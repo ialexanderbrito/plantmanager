@@ -44,6 +44,12 @@
     "prettier/prettier": "error",
     "react/jsx-one-expression-per-line": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
+    "camelcase": [
+      0,
+      {
+        "properties": "never"
+      }
+    ],
     "semi": "off",
     "import/extensions": [
       "error",
