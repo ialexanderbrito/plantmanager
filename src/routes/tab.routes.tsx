@@ -1,4 +1,5 @@
 import React from 'react';
+import { Platform } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialIcons } from '@expo/vector-icons';
 
@@ -23,8 +24,8 @@ const AuthRoutes = () => {
             height: 0, // for iOS
           },
           borderTopColor: colors.background,
-          paddingVertical: 0,
-          height: 68,
+          paddingVertical: Platform.OS === 'ios' ? 20 : 0,
+          height: Platform.OS === 'ios' ? 88 : 68,
         },
       }}
     >
