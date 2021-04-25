@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Alert, Platform } from 'react-native';
 import DateTimePicker, { Event } from '@react-native-community/datetimepicker';
 import { isBefore, format } from 'date-fns';
-import { useRoute } from '@react-navigation/core';
+import { useNavigation, useRoute } from '@react-navigation/core';
 
-import { PlantProps } from '../../libs/storage';
+import { PlantProps, savePlant } from '../../libs/storage';
 
 import { Button } from '../../components/Button';
 
@@ -30,7 +30,9 @@ interface Params {
 }
 
 export function PlantSave() {
+  const navigation = useNavigation();
   const route = useRoute();
+
   const [selectedDateTime, setSelectedDateTime] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(Platform.OS === 'ios');
 
@@ -46,11 +48,31 @@ export function PlantSave() {
       return Alert.alert('Escolha uma hora no futuro! ⏰');
     }
 
-    if (dateTime) selectedDateTime(dateTime);
+    if (dateTime) setSelectedDateTime(dateTime);
   }
 
   function handleOpenDateTimePickerForAndroid() {
     setShowDatePicker((oldState) => !oldState);
+  }
+
+  async function handleSavePlant() {
+    try {
+      await savePlant({
+        ...plant,
+        dateTimeNotification: selectedDateTime,
+      });
+
+      navigation.navigate('Confirmation', {
+        title: 'Tudo certo',
+        subtitle:
+          'Fique tranquilo que sempre vamos lembrar você de cuidar da sua plantinha com muito cuidado.',
+        buttonTitle: 'Muito Obrigado :D',
+        icon: 'hug',
+        nextScreen: 'MyPlants',
+      });
+    } catch {
+      Alert.alert('Não foi possível salvar. 😢');
+    }
   }
 
   return (
@@ -72,7 +94,7 @@ export function PlantSave() {
             <DateTimePicker
               value={selectedDateTime}
               mode="time"
-              display="spinner"
+              display="default"
               onChange={handleChangeTime}
             />
           )}
@@ -86,7 +108,7 @@ export function PlantSave() {
             </DateTimePickerButton>
           )}
 
-          <Button title="Cadastrar planta" onPress={() => { }} />
+          <Button title="Cadastrar planta" onPress={handleSavePlant} />
         </Controller>
       </Container>
     </>
