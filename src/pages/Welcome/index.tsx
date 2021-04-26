@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/core';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { Feather } from '@expo/vector-icons';
 import wateringImg from '../../assets/watering.png';
@@ -17,8 +18,26 @@ import {
 export function Welcome() {
   const navigation = useNavigation();
 
+  const [userName, setUserName] = useState<string>();
+  const [userPhoto, setUserPhoto] = useState<string>();
+
+  useEffect(() => {
+    async function loadStorageUserName() {
+      const user = await AsyncStorage.getItem('@plantmanager:user');
+      const image = await AsyncStorage.getItem('@plantmanager:image');
+
+      setUserName(user || '');
+      setUserPhoto(image || '');
+    }
+    loadStorageUserName();
+  }, [userName]);
+
   function handleStart() {
-    navigation.navigate('UserIdentification');
+    if (userName && userPhoto) {
+      navigation.navigate('MyPlants');
+    } else {
+      navigation.navigate('UserIdentification');
+    }
   }
 
   return (
