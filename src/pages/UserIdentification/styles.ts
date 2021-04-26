@@ -56,6 +56,28 @@ export const Input = styled.TextInput`
   text-align: center;
 `;
 
+export const Uploaded = styled.View`
+  align-self: center;
+  padding-top: 10px;
+`;
+
+export const OpenImage = styled.TouchableOpacity``;
+
+export const Avatar = styled.Image`
+  width: 70px;
+  height: 70px;
+  border-radius: 40px;
+`;
+
+export const NotAvatar = styled.View`
+  width: 70px;
+  height: 70px;
+  border-radius: 40px;
+  background-color: ${colors.gray};
+  justify-content: center;
+  align-items: center;
+`;
+
 export const Footer = styled.View`
   width: 100%;
   margin-top: 40px;

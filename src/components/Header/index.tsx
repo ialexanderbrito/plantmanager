@@ -3,16 +3,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { Container, Content, Greeting, Username, Avatar } from './styles';
 
-import userImg from '../../assets/alexander.png';
-
 export function Header() {
   const [userName, setUserName] = useState<string>();
+  const [userPhoto, setUserPhoto] = useState<string>();
 
   useEffect(() => {
     async function loadStorageUserName() {
       const user = await AsyncStorage.getItem('@plantmanager:user');
+      const image = await AsyncStorage.getItem('@plantmanager:image');
 
       setUserName(user || '');
+      setUserPhoto(image || '');
     }
     loadStorageUserName();
   }, [userName]);
@@ -23,7 +24,7 @@ export function Header() {
         <Greeting>Olá,</Greeting>
         <Username>{userName}</Username>
       </Content>
-      <Avatar source={userImg} />
+      <Avatar source={{ uri: userPhoto }} />
     </Container>
   );
 }

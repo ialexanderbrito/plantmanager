@@ -27,8 +27,19 @@ export const Username = styled.Text`
   line-height: 40px;
 `;
 
+export const OpenImage = styled.TouchableOpacity``;
+
 export const Avatar = styled.Image`
   width: 70px;
   height: 70px;
   border-radius: 40px;
+`;
+
+export const NotAvatar = styled.View`
+  width: 70px;
+  height: 70px;
+  border-radius: 40px;
+  background-color: ${colors.gray};
+  justify-content: center;
+  align-items: center;
 `;

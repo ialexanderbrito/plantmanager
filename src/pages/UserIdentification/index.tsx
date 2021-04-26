@@ -6,7 +6,10 @@ import {
   Alert,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
+import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { AntDesign } from '@expo/vector-icons';
 
 import { Button } from '../../components/Button';
 
@@ -21,6 +24,10 @@ import {
   Title,
   Emoji,
   Input,
+  Uploaded,
+  OpenImage,
+  Avatar,
+  NotAvatar,
   Footer,
 } from './styles';
 
@@ -30,6 +37,7 @@ export function UserIdentification() {
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
   const [name, setName] = useState<string>();
+  const [photo, setPhoto] = useState<string>();
 
   function handleInputBlur() {
     setIsFocused(false);
@@ -43,6 +51,28 @@ export function UserIdentification() {
   function handleInputChange(value: string) {
     setIsFilled(!!value);
     setName(value);
+  }
+
+  async function handleUserImage() {
+    const { status } = await ImagePicker.requestCameraPermissionsAsync();
+
+    if (status !== 'granted') {
+      return Alert.alert('Aviso', 'Você não pode adicionar uma imagem 😢');
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      quality: 1,
+      mediaType: ImagePicker.MediaTypeOptions.Images,
+    });
+
+    if (result.cancelled) {
+      return;
+    }
+
+    const { uri: image } = result;
+    await AsyncStorage.setItem('@plantmanager:image', image);
+    setPhoto(image);
   }
 
   async function handleSubmit() {
@@ -87,6 +117,19 @@ export function UserIdentification() {
                 onFocus={handleInputFocus}
                 onChangeText={handleInputChange}
               />
+
+              <Title>Adicione sua {'\n'}foto de perfil</Title>
+              <Uploaded>
+                <OpenImage onPress={handleUserImage}>
+                  {photo ? (
+                    <Avatar source={{ uri: photo }} />
+                  ) : (
+                    <NotAvatar>
+                      <AntDesign name="plus" size={24} color={colors.heading} />
+                    </NotAvatar>
+                  )}
+                </OpenImage>
+              </Uploaded>
               <Footer>
                 <Button title="Confirmar" onPress={handleSubmit} />
               </Footer>
